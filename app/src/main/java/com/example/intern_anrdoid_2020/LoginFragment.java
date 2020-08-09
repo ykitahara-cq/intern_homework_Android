@@ -57,19 +57,24 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View v = inflater.inflate(R.layout.fragment_login, container, false);
+
+        return showSearchActivity(v);
+
     }
-    private void showSearchActivity(){
 
-        Button loginbutton = getView().findViewById(R.id.login_button);
-       
+    private View showSearchActivity(View v){
 
+        Button loginButton = (Button)v.findViewById(R.id.login_button);
+        loginButton.setOnClickListener((View view) -> {
+            startActivity(SearchActivity.createIntent(getView().getContext()));
+        });
+        return v;
     }
 }

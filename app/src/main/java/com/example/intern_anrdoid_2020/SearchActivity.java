@@ -3,9 +3,15 @@ package com.example.intern_anrdoid_2020;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 public class SearchActivity extends AppCompatActivity {
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SearchActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
