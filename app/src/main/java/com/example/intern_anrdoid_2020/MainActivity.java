@@ -21,6 +21,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_layout_frame, new LoginFragment())
                            .addToBackStack(null)
                            .commit();
-
     }
 }
