@@ -11,7 +11,7 @@ public class QiitaArticleResponse {
     public String createdAt;
     public Group group;
     public String id;
-    public Intege likesCount;
+    public Integer likesCount;
     public Boolean isPrivate;
     public Integer reactionsCount;
     public List<Tags> tags;

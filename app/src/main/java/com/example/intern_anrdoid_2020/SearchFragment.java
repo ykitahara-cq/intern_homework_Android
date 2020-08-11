@@ -70,7 +70,13 @@ public class SearchFragment extends Fragment {
         Button searchButton = (Button) v.findViewById(R.id.search_button);
         searchButton.setOnClickListener((View view) -> {
             String searchkay = getView().<EditText>findViewById(R.id.edit_search).getText().toString();
-            showQiitaListFragment(searchkay);
+            QiitaListRepository.listArticle(1,1, searchkay).observe(getViewLifecycleOwner(), qiitaListResponse -> {
+                // TODO: qiitaListのレスポンス情報を含める
+                if (qiitaListResponse != null) {
+                    showQiitaListFragment("");
+                }
+            });
+
         });
         return v;
     }
