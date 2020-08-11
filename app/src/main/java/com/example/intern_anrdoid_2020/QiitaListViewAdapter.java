@@ -9,16 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+
 import java.util.List;
 
 public class QiitaListViewAdapter extends RecyclerView.Adapter<QiitaListViewAdapter.QiitaListViewHolder> {
 
-    private List<String> listData;
+    private List<QiitaArticleResponse> listData;
 
     public static class QiitaListViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivQiitaImage;
-
         public TextView tvQiitaTitle;
         public TextView tvQiitaLgtm;
 
@@ -26,11 +28,11 @@ public class QiitaListViewAdapter extends RecyclerView.Adapter<QiitaListViewAdap
             super(itemView);
             ivQiitaImage = itemView.findViewById(R.id.iv_book_image);
             tvQiitaTitle = itemView.findViewById(R.id.tv_book_title);
-            tvQiitaLgtm = itemView.findViewById(R.id.tv_book_price);
+            tvQiitaLgtm = itemView.findViewById(R.id.tv_book_price_tax);
         }
     }
 
-    public QiitaListViewAdapter(List<String> qiitaListData) {
+    public QiitaListViewAdapter(List<QiitaArticleResponse> qiitaListData) {
         this.listData = qiitaListData;
     }
 
@@ -44,9 +46,12 @@ public class QiitaListViewAdapter extends RecyclerView.Adapter<QiitaListViewAdap
     @Override
     public void onBindViewHolder(QiitaListViewHolder holder, int position) {
 
-        // TODO: qiitaApiから取得したjsonデータを格納する
-        holder.tvQiitaTitle.setText("test");
-        holder.tvQiitaLgtm.setText("2");
+        QiitaArticleResponse qiitaArticleResponse = listData.get(position);
+
+        holder.tvQiitaTitle.setText(qiitaArticleResponse.title);
+        holder.tvQiitaLgtm.setText(String.valueOf(qiitaArticleResponse.likesCount));
+        Glide.with(holder.ivQiitaImage.getContext()).load(qiitaArticleResponse.user.profileImageUrl).into(holder.ivQiitaImage);
+        // TODO:クリックリスナーの実行
     }
 
     @Override

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,33 +26,23 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class QiitaListFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "qiitaArticles";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private List<QiitaArticleResponse> qiitaArticles = new ArrayList<>();
 
-
-    public QiitaListFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     * @param response qiitaArticle.
      * @return A new instance of fragment QiitaListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QiitaListFragment newInstance(String param1) {
+    public static QiitaListFragment newInstance(ArrayList<QiitaArticleResponse> response) {
         QiitaListFragment fragment = new QiitaListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(ARG_PARAM1, response);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +51,7 @@ public class QiitaListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
+            qiitaArticles = (List<QiitaArticleResponse>) getArguments().getSerializable(ARG_PARAM1);
         }
     }
 
@@ -81,10 +72,6 @@ public class QiitaListFragment extends Fragment {
 
     private void setupRecyclerView() {
 
-        List<String > list = new ArrayList<>();
-
-        list.add("test");
-        list.add("test2");
 
         RecyclerView recyclerView = getView().findViewById(R.id.rv_menu);
 
@@ -92,7 +79,7 @@ public class QiitaListFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        QiitaListViewAdapter adapter = new QiitaListViewAdapter(list);
+        QiitaListViewAdapter adapter = new QiitaListViewAdapter(qiitaArticles);
 
         recyclerView.setAdapter(adapter);
 

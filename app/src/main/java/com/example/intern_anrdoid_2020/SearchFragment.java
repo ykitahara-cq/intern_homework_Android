@@ -11,6 +11,11 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +48,7 @@ public class SearchFragment extends Fragment {
     public static SearchFragment newInstance(String searchKey) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, searchKey);
+//        args.putString(ARG_PARAM1, searchKey);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,10 +75,10 @@ public class SearchFragment extends Fragment {
         Button searchButton = (Button) v.findViewById(R.id.search_button);
         searchButton.setOnClickListener((View view) -> {
             String searchkay = getView().<EditText>findViewById(R.id.edit_search).getText().toString();
-            QiitaListRepository.listArticle(1,1, searchkay).observe(getViewLifecycleOwner(), qiitaListResponse -> {
+            QiitaListRepository.listArticle(1,5, searchkay).observe(getViewLifecycleOwner(), qiitaListResponse -> {
                 // TODO: qiitaListのレスポンス情報を含める
                 if (qiitaListResponse != null) {
-                    showQiitaListFragment("");
+                    showQiitaListFragment(qiitaListResponse);
                 }
             });
 
@@ -81,9 +86,9 @@ public class SearchFragment extends Fragment {
         return v;
     }
 
-    private void showQiitaListFragment(String searchKey) {
+    private void showQiitaListFragment(ArrayList<QiitaArticleResponse> qiitaArticleResponse) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.search_layout_frame, QiitaListFragment.newInstance(searchKey))
+        fragmentTransaction.replace(R.id.search_layout_frame, QiitaListFragment.newInstance(qiitaArticleResponse))
                            .addToBackStack(null)
                            .commit();
     }

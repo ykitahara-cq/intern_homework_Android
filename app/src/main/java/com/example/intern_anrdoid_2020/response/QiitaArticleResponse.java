@@ -1,9 +1,10 @@
 package com.example.intern_anrdoid_2020.response;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class QiitaArticleResponse {
+public class QiitaArticleResponse implements Serializable {
 
     public String rendered_body;
     public String body;
