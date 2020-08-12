@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Intern_Anrdoid_2020</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="login_view">ログイン画面</string>
+    <string name="search_view">検索画面</string>
+    <string name="Article_view">記事一覧</string>
     <string name="login_button">ログイン</string>
     <string name="search">検索</string>
     <string name="search_comment">キーワードを入力してください</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="qitta_lgtm">LGTM:</string>
     <string name="qiita_title">title</string>

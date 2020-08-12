@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".view.SearchActivity">
 
     <FrameLayout
         android:id="@+id/search_layout_frame"
@@ -25,6 +25,7 @@
         android:layout_marginBottom="0dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:itemTextColor="@color/colorWhite"
         app:menu="@menu/bottom_navigation_items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

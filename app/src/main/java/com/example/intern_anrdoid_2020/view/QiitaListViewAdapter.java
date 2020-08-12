@@ -1,4 +1,4 @@
-package com.example.intern_anrdoid_2020;
+package com.example.intern_anrdoid_2020.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+import com.example.intern_anrdoid_2020.R;
+import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse;
 
 import java.util.List;
 
@@ -18,11 +19,21 @@ public class QiitaListViewAdapter extends RecyclerView.Adapter<QiitaListViewAdap
 
     private List<QiitaArticleResponse> listData;
 
+    private OnClickItemListener listener;
+
+    public interface OnClickItemListener {
+        void onClickQiitaListData(QiitaArticleResponse item);
+    }
+
+    public void setOnClickItemListener(OnClickItemListener listener) {
+        this.listener = listener;
+    }
+
     public static class QiitaListViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView ivQiitaImage;
-        public TextView tvQiitaTitle;
-        public TextView tvQiitaLgtm;
+        private ImageView ivQiitaImage;
+        private TextView tvQiitaTitle;
+        private TextView tvQiitaLgtm;
 
         private QiitaListViewHolder(View itemView) {
             super(itemView);
@@ -51,7 +62,14 @@ public class QiitaListViewAdapter extends RecyclerView.Adapter<QiitaListViewAdap
         holder.tvQiitaTitle.setText(qiitaArticleResponse.title);
         holder.tvQiitaLgtm.setText(String.valueOf(qiitaArticleResponse.likesCount));
         Glide.with(holder.ivQiitaImage.getContext()).load(qiitaArticleResponse.user.profileImageUrl).into(holder.ivQiitaImage);
-        // TODO:クリックリスナーの実行
+        holder.itemView.setOnClickListener((View v) -> {
+            if (position == RecyclerView.NO_POSITION) {
+                return;
+            }
+            if (listener != null) {
+                listener.onClickQiitaListData(qiitaArticleResponse);
+            }
+        });
     }
 
     @Override

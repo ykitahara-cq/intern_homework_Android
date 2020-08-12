@@ -1,15 +1,12 @@
-package com.example.intern_anrdoid_2020;
+package com.example.intern_anrdoid_2020.view;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.intern_anrdoid_2020.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         showLoginFragment();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.login_view);
     }
 
     private void showLoginFragment() {

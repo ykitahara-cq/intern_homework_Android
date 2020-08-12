@@ -1,11 +1,13 @@
-package com.example.intern_anrdoid_2020;
+package com.example.intern_anrdoid_2020.view;
 
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+import com.example.intern_anrdoid_2020.HttpClient;
+import com.example.intern_anrdoid_2020.QiitaService;
+import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse;
 
 import java.util.ArrayList;
 

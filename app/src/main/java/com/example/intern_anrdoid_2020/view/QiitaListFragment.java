@@ -1,48 +1,33 @@
-package com.example.intern_anrdoid_2020;
+package com.example.intern_anrdoid_2020.view;
 
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.intern_anrdoid_2020.response.QiitaArticleResponse;
+import com.example.intern_anrdoid_2020.R;
+import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QiitaListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class QiitaListFragment extends Fragment {
-    private static final String ARG_PARAM1 = "qiitaArticles";
+    private static final String QIITA_ARTICLES = "qiitaArticles";
 
-    private List<QiitaArticleResponse> qiitaArticles = new ArrayList<>();
+    private ArrayList<QiitaArticleResponse> qiitaArticles = new ArrayList<>();
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param response qiitaArticle.
-     * @return A new instance of fragment QiitaListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static QiitaListFragment newInstance(ArrayList<QiitaArticleResponse> response) {
         QiitaListFragment fragment = new QiitaListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_PARAM1, response);
+        args.putSerializable(QIITA_ARTICLES, response);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,8 +36,10 @@ public class QiitaListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            qiitaArticles = (List<QiitaArticleResponse>) getArguments().getSerializable(ARG_PARAM1);
+            qiitaArticles = (ArrayList<QiitaArticleResponse>) getArguments().getSerializable(QIITA_ARTICLES);
         }
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(R.string.Article_view);
     }
 
     @Override
@@ -67,11 +54,9 @@ public class QiitaListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         setupRecyclerView();
-
     }
 
     private void setupRecyclerView() {
-
 
         RecyclerView recyclerView = getView().findViewById(R.id.rv_menu);
 
@@ -86,5 +71,8 @@ public class QiitaListFragment extends Fragment {
         DividerItemDecoration decorator = new DividerItemDecoration(getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(decorator);
 
+        adapter.setOnClickItemListener((qiitaArticles)-> {
+            startActivity(WebViewActivity.createIntent(getView().getContext(), qiitaArticles.url));
+        });
     }
 }

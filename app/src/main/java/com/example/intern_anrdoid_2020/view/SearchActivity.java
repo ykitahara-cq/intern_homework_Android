@@ -1,4 +1,4 @@
-package com.example.intern_anrdoid_2020;
+package com.example.intern_anrdoid_2020.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.intern_anrdoid_2020.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchActivity extends AppCompatActivity {
@@ -30,7 +31,6 @@ public class SearchActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.search_layout_frame, new SearchFragment())
                            .addToBackStack(null)
                            .commit();
-
     }
 
     private void setupBottomNavigation() {

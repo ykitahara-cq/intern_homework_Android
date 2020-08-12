@@ -1,4 +1,4 @@
-package com.example.intern_anrdoid_2020.response;
+package com.example.intern_anrdoid_2020.model.response;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,7 +22,7 @@ public class QiitaArticleResponse implements Serializable {
     public User user;
     public String pageViewsCount;
 
-    public static class Group{
+    public static class Group implements Serializable {
         public Date createdAt;
 
         public Integer id;
@@ -33,12 +33,12 @@ public class QiitaArticleResponse implements Serializable {
 
     }
 
-    public static class Tags {
+    public static class Tags implements Serializable {
         public String name;
         public List<String> versions;
     }
 
-    public static class User {
+    public static class User implements Serializable {
         public String description;
         public String facebookId;
         public Integer followeesCount;
