@@ -26,7 +26,7 @@ public class QiitaListFragment extends Fragment {
 
     public static QiitaListFragment newInstance(ArrayList<QiitaArticleResponse> response) {
         QiitaListFragment fragment = new QiitaListFragment();
-        Bundle args = new Bundle();
+        Bundle args = new Bundle(1);
         args.putSerializable(QIITA_ARTICLES, response);
         fragment.setArguments(args);
         return fragment;
