@@ -1,17 +1,21 @@
 package com.example.intern_anrdoid_2020.view
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.intern_anrdoid_2020.R
 import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
+//import sun.jvm.hotspot.utilities.IntArray
 import java.util.*
+
 
 class QiitaListFragment : Fragment() {
 
@@ -44,9 +48,11 @@ class QiitaListFragment : Fragment() {
         recyclerView.adapter = adapter
         val decorator = DividerItemDecoration(context, layoutManager.orientation)
         recyclerView.addItemDecoration(decorator)
-        adapter.setOnItemClickListener(object: QiitaListViewAdapter.OnItemClickListener{
+        adapter.setOnItemClickListener(object : QiitaListViewAdapter.OnItemClickListener {
             override fun onItemClickListener(item: QiitaArticleResponse) {
-                startActivity(WebViewActivity.Companion.createIntent(view!!.context, item.url))
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                customTabsIntent.launchUrl(view!!.context, Uri.parse(item.url))
             }
         })
 
