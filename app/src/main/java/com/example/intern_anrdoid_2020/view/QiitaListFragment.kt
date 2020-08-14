@@ -48,14 +48,13 @@ class QiitaListFragment : Fragment() {
         recyclerView.adapter = adapter
         val decorator = DividerItemDecoration(context, layoutManager.orientation)
         recyclerView.addItemDecoration(decorator)
-        adapter.setOnItemClickListener(object : QiitaListViewAdapter.OnItemClickListener {
+        adapter.setOnItemClickListener(object: QiitaListViewAdapter.OnItemClickListener{
             override fun onItemClickListener(item: QiitaArticleResponse) {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(view!!.context, Uri.parse(item.url))
             }
         })
-
     }
 
     companion object {

@@ -3,7 +3,6 @@ package com.example.intern_anrdoid_2020.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,7 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
         fun onItemClickListener(item: QiitaArticleResponse)
     }
 
-        fun setOnItemClickListener(listener: OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
@@ -30,9 +29,9 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
         val tvQiitaLgtm: TextView
 
         init {
-            ivQiitaImage = itemView.findViewById(R.id.iv_book_image)
-            tvQiitaTitle = itemView.findViewById(R.id.tv_book_title)
-            tvQiitaLgtm = itemView.findViewById(R.id.tv_book_price_tax)
+            ivQiitaImage = itemView.findViewById(R.id.iv_user_image)
+            tvQiitaTitle = itemView.findViewById(R.id.tv_qiita_title)
+            tvQiitaLgtm = itemView.findViewById(R.id.tv_qiita_lgtm_counter)
         }
     }
 
@@ -59,5 +58,4 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
     override fun getItemCount(): Int {
         return listData!!.size
     }
-
 }
