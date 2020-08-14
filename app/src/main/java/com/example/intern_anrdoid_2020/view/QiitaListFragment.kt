@@ -14,11 +14,13 @@ import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
 import java.util.*
 
 class QiitaListFragment : Fragment() {
-    private var qiitaArticles: ArrayList<QiitaArticleResponse>? = ArrayList()
+
+    private var qiitaArticles: ArrayList<QiitaArticleResponse> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            qiitaArticles = arguments!!.getSerializable(QIITA_ARTICLES) as ArrayList<QiitaArticleResponse>?
+            qiitaArticles = arguments!!.getSerializable(QIITA_ARTICLES) as ArrayList<QiitaArticleResponse>
         }
         val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
         actionBar!!.setTitle(R.string.Article_view)
@@ -42,13 +44,17 @@ class QiitaListFragment : Fragment() {
         recyclerView.adapter = adapter
         val decorator = DividerItemDecoration(context, layoutManager.orientation)
         recyclerView.addItemDecoration(decorator)
-//        adapter.setOnClickItemListener { qiitaArticles: QiitaArticleResponse ->
-//            startActivity(WebViewActivity.Companion.createIntent(view!!.context, qiitaArticles.url)) }
+        adapter.setOnItemClickListener(object: QiitaListViewAdapter.OnItemClickListener{
+            override fun onItemClickListener(item: QiitaArticleResponse) {
+                startActivity(WebViewActivity.Companion.createIntent(view!!.context, item.url))
+            }
+        })
+
     }
 
     companion object {
         private const val QIITA_ARTICLES = "qiitaArticles"
-        fun newInstance(response: ArrayList<QiitaArticleResponse?>?): QiitaListFragment {
+        fun newInstance(response: ArrayList<QiitaArticleResponse>): QiitaListFragment {
             val fragment = QiitaListFragment()
             val args = Bundle()
             args.putSerializable(QIITA_ARTICLES, response)

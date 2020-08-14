@@ -12,13 +12,14 @@ class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
-        showWebView()
+//        showWebView()
     }
 
     private fun showWebView() {
         val url = intent.getStringExtra(ARGS_QIITA_URL)
-        val webView = findViewById<View>(R.id.webview) as WebView
-        webView.loadUrl(url)
+        val webView : WebView = findViewById(R.id.webview)
+//        webView.loadUrl(url)
+        webView.loadUrl("https://www.facebook.com")
     }
 
     companion object {

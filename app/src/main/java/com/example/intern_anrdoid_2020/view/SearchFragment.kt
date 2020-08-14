@@ -30,14 +30,14 @@ class SearchFragment : Fragment() {
         val searchButton = v.findViewById<View>(R.id.search_button) as Button
         searchButton.setOnClickListener { view: View? ->
             val searchkay = getView()!!.findViewById<EditText>(R.id.edit_search).text.toString()
-            QiitaListRepository.listArticle(PAGE, PER_PAGE, searchkay).observe(viewLifecycleOwner, Observer { qiitaListResponse: ArrayList<QiitaArticleResponse?>? ->
+            QiitaListRepository.listArticle(PAGE, PER_PAGE, searchkay).observe(viewLifecycleOwner, Observer { qiitaListResponse: ArrayList<QiitaArticleResponse> ->
                 qiitaListResponse?.let { showQiitaListFragment(it) }
             })
         }
         return v
     }
 
-    private fun showQiitaListFragment(qiitaArticleResponse: ArrayList<QiitaArticleResponse?>) {
+    private fun showQiitaListFragment(qiitaArticleResponse: ArrayList<QiitaArticleResponse>) {
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         fragmentTransaction.replace(R.id.search_layout_frame, QiitaListFragment.Companion.newInstance(qiitaArticleResponse))
                 .addToBackStack(null)

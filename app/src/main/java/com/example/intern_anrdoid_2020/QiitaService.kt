@@ -12,5 +12,5 @@ interface QiitaService {
     @Headers("Content-Type: application/json")
     fun getQiitaArticle(@Query("page") page: Int,
                         @Query("per_page") per_page: Int,
-                        @Query("query") query: String?): Call<ArrayList<QiitaArticleResponse?>?>?
+                        @Query("query") query: String?): Call<ArrayList<QiitaArticleResponse>>
 }

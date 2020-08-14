@@ -3,6 +3,7 @@ package com.example.intern_anrdoid_2020.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +13,14 @@ import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
 import com.example.intern_anrdoid_2020.view.QiitaListViewAdapter.QiitaListViewHolder
 
 class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : RecyclerView.Adapter<QiitaListViewHolder>() {
-    private var listener: OnClickItemListener? = null
 
-    interface OnClickItemListener {
-        fun onClickQiitaListData(item: QiitaArticleResponse?)
+    lateinit var listener: OnItemClickListener
+
+    interface OnItemClickListener {
+        fun onItemClickListener(item: QiitaArticleResponse)
     }
 
-    fun setOnClickItemListener(listener: OnClickItemListener?) {
+        fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
@@ -43,13 +45,13 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
         val qiitaArticleResponse = listData!![position]
         holder.tvQiitaTitle.text = qiitaArticleResponse.title
         holder.tvQiitaLgtm.text = qiitaArticleResponse.likesCount.toString()
-        Glide.with(holder.ivQiitaImage.context).load(qiitaArticleResponse.user.profileImageUrl).into(holder.ivQiitaImage)
+        Glide.with(holder.ivQiitaImage.context).load(qiitaArticleResponse.user?.profileImageUrl).into(holder.ivQiitaImage)
         holder.itemView.setOnClickListener { v: View? ->
             if (position == RecyclerView.NO_POSITION) {
                 return@setOnClickListener
             }
             if (listener != null) {
-                listener!!.onClickQiitaListData(qiitaArticleResponse)
+                listener!!.onItemClickListener(qiitaArticleResponse)
             }
         }
     }
