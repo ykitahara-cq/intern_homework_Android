@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.intern_anrdoid_2020.R
 import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
-import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_qiita_list.*
 //import sun.jvm.hotspot.utilities.IntArray
 import java.util.*
 
@@ -30,7 +30,7 @@ class QiitaListFragment : Fragment() {
 
         val appCompatActivity = activity as AppCompatActivity?
         val actionBar = appCompatActivity?.supportActionBar
-        actionBar?.setTitle(R.string.Article_view)
+        actionBar?.setTitle(R.string.article_view)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,7 +44,7 @@ class QiitaListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         view?.let {view ->
-            val recyclerView: RecyclerView = view.findViewById(R.id.rv_menu)
+            val recyclerView: RecyclerView = rv_menu
             val layoutManager = LinearLayoutManager(view.context)
             recyclerView.layoutManager = layoutManager
             val adapter = QiitaListViewAdapter(qiitaArticles)

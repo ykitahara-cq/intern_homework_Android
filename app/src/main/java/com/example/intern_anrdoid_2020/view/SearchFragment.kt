@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.intern_anrdoid_2020.R
 import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
+import kotlinx.android.synthetic.main.fragment_search.view.*
 import java.util.*
 
 class SearchFragment : Fragment() {
@@ -28,12 +29,14 @@ class SearchFragment : Fragment() {
     }
 
     private fun setup(v: View): View {
-        val searchButton = v.findViewById<View>(R.id.search_button) as Button
+        val searchButton :Button = v.search_button
         searchButton.setOnClickListener {
-            val searchkay = it.findViewById<EditText>(R.id.edit_search).text.toString()
-            QiitaListRepository.listArticle(PAGE, PER_PAGE, searchkay).observe(viewLifecycleOwner, Observer { qiitaListResponse: ArrayList<QiitaArticleResponse> ->
-                showQiitaListFragment(qiitaListResponse)
-            })
+            view?.let {
+                val searchKey  = it.edit_search.text.toString()
+                QiitaListRepository.listArticle(PAGE, PER_PAGE, searchKey).observe(viewLifecycleOwner, Observer { qiitaListResponse: ArrayList<QiitaArticleResponse> ->
+                    showQiitaListFragment(qiitaListResponse)
+                })
+            }
         }
         return v
     }

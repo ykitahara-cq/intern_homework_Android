@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.intern_anrdoid_2020.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation)
+        val bottomNavigationView = navigation
         bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
             item.isChecked = true
             when (item.itemId) {
@@ -33,7 +34,7 @@ class SearchActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
             }
-            false
+            return@setOnNavigationItemSelectedListener false
         }
     }
 

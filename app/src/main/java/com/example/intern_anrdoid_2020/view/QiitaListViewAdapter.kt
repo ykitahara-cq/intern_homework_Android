@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.intern_anrdoid_2020.R
 import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
 import com.example.intern_anrdoid_2020.view.QiitaListViewAdapter.QiitaListViewHolder
+import kotlinx.android.synthetic.main.row_qiita_list.view.*
 
 class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : RecyclerView.Adapter<QiitaListViewHolder>() {
 
@@ -29,9 +30,9 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
         val tvQiitaLgtm: TextView
 
         init {
-            ivQiitaImage = itemView.findViewById(R.id.iv_user_image)
-            tvQiitaTitle = itemView.findViewById(R.id.tv_qiita_title)
-            tvQiitaLgtm = itemView.findViewById(R.id.tv_qiita_lgtm_counter)
+            ivQiitaImage = itemView.iv_user_image
+            tvQiitaTitle = itemView.tv_qiita_title
+            tvQiitaLgtm = itemView.tv_qiita_lgtm_counter
         }
     }
 
@@ -55,7 +56,10 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
         }
     }
 
-    override fun getItemCount(): Int? {
-        return listData?.size
+    override fun getItemCount(): Int {
+        listData?.let {
+            return listData.size
+        }
+        return 0
     }
 }
