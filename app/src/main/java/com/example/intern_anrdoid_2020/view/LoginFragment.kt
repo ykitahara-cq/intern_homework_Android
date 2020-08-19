@@ -9,19 +9,14 @@ import androidx.fragment.app.Fragment
 import com.example.intern_anrdoid_2020.R
 
 class LoginFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_login, container, false)
         return showSearchActivity(v)
     }
 
     private fun showSearchActivity(v: View): View {
         val loginButton = v.findViewById<View>(R.id.login_button) as Button
-        loginButton.setOnClickListener { view: View? -> startActivity(SearchActivity.Companion.createIntent(getView()!!.context)) }
+        loginButton.setOnClickListener { startActivity(SearchActivity.createIntent(view?.context)) }
         return v
     }
 }

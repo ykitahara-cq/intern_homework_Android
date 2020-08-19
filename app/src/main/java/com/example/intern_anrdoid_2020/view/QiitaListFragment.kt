@@ -13,25 +13,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.intern_anrdoid_2020.R
 import com.example.intern_anrdoid_2020.model.response.QiitaArticleResponse
+import kotlinx.android.synthetic.main.fragment_login.*
 //import sun.jvm.hotspot.utilities.IntArray
 import java.util.*
 
 
 class QiitaListFragment : Fragment() {
 
-    private var qiitaArticles: ArrayList<QiitaArticleResponse> = ArrayList()
+    private var qiitaArticles: ArrayList<QiitaArticleResponse>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments != null) {
-            qiitaArticles = arguments!!.getSerializable(QIITA_ARTICLES) as ArrayList<QiitaArticleResponse>
+        arguments?.let { argument ->
+            qiitaArticles = argument.getSerializable(QIITA_ARTICLES) as? ArrayList<QiitaArticleResponse>
         }
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        actionBar!!.setTitle(R.string.Article_view)
+
+        val appCompatActivity = activity as AppCompatActivity?
+        val actionBar = appCompatActivity?.supportActionBar
+        actionBar?.setTitle(R.string.Article_view)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_qiita_list, container, false)
     }
 
@@ -41,20 +43,23 @@ class QiitaListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val recyclerView: RecyclerView = view!!.findViewById(R.id.rv_menu)
-        val layoutManager = LinearLayoutManager(view!!.context)
-        recyclerView.layoutManager = layoutManager
-        val adapter = QiitaListViewAdapter(qiitaArticles)
-        recyclerView.adapter = adapter
-        val decorator = DividerItemDecoration(context, layoutManager.orientation)
-        recyclerView.addItemDecoration(decorator)
-        adapter.setOnItemClickListener(object: QiitaListViewAdapter.OnItemClickListener{
-            override fun onItemClickListener(item: QiitaArticleResponse) {
-                val builder = CustomTabsIntent.Builder()
-                val customTabsIntent = builder.build()
-                customTabsIntent.launchUrl(view!!.context, Uri.parse(item.url))
-            }
-        })
+        view?.let {view ->
+            val recyclerView: RecyclerView = view.findViewById(R.id.rv_menu)
+            val layoutManager = LinearLayoutManager(view.context)
+            recyclerView.layoutManager = layoutManager
+            val adapter = QiitaListViewAdapter(qiitaArticles)
+            recyclerView.adapter = adapter
+            val decorator = DividerItemDecoration(context, layoutManager.orientation)
+            recyclerView.addItemDecoration(decorator)
+
+            adapter.setOnItemClickListener(object: QiitaListViewAdapter.OnItemClickListener{
+                override fun onItemClickListener(item: QiitaArticleResponse) {
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(view.context, Uri.parse(item.url))
+                }
+            })
+        }
     }
 
     companion object {

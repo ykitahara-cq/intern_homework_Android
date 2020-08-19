@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         showLoginFragment()
         val actionBar = supportActionBar
-        actionBar!!.setTitle(R.string.login_view)
+        actionBar?.setTitle(R.string.login_view)
     }
 
     private fun showLoginFragment() {

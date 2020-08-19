@@ -41,21 +41,21 @@ class QiitaListViewAdapter(private val listData: List<QiitaArticleResponse>?) : 
     }
 
     override fun onBindViewHolder(holder: QiitaListViewHolder, position: Int) {
-        val qiitaArticleResponse = listData!![position]
-        holder.tvQiitaTitle.text = qiitaArticleResponse.title
-        holder.tvQiitaLgtm.text = qiitaArticleResponse.likesCount.toString()
-        Glide.with(holder.ivQiitaImage.context).load(qiitaArticleResponse.user?.profileImageUrl).into(holder.ivQiitaImage)
-        holder.itemView.setOnClickListener { v: View? ->
-            if (position == RecyclerView.NO_POSITION) {
-                return@setOnClickListener
-            }
-            if (listener != null) {
-                listener!!.onItemClickListener(qiitaArticleResponse)
+        listData?.let {
+            val qiitaArticleResponse = listData[position]
+            holder.tvQiitaTitle.text = qiitaArticleResponse.title
+            holder.tvQiitaLgtm.text = qiitaArticleResponse.likesCount.toString()
+            Glide.with(holder.ivQiitaImage.context).load(qiitaArticleResponse.user?.profileImageUrl).into(holder.ivQiitaImage)
+            holder.itemView.setOnClickListener {
+                if (position == RecyclerView.NO_POSITION) {
+                    return@setOnClickListener
+                }
+                listener.onItemClickListener(qiitaArticleResponse)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return listData!!.size
+    override fun getItemCount(): Int? {
+        return listData?.size
     }
 }

@@ -16,8 +16,9 @@ import java.util.*
 class SearchFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        actionBar!!.setTitle(R.string.search_view)
+        val appCompatActivity = activity as AppCompatActivity?
+        val actionBar = appCompatActivity?.supportActionBar
+        actionBar?.setTitle(R.string.search_view)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,20 +29,22 @@ class SearchFragment : Fragment() {
 
     private fun setup(v: View): View {
         val searchButton = v.findViewById<View>(R.id.search_button) as Button
-        searchButton.setOnClickListener { view: View? ->
-            val searchkay = getView()!!.findViewById<EditText>(R.id.edit_search).text.toString()
+        searchButton.setOnClickListener {
+            val searchkay = it.findViewById<EditText>(R.id.edit_search).text.toString()
             QiitaListRepository.listArticle(PAGE, PER_PAGE, searchkay).observe(viewLifecycleOwner, Observer { qiitaListResponse: ArrayList<QiitaArticleResponse> ->
-                qiitaListResponse?.let { showQiitaListFragment(it) }
+                showQiitaListFragment(qiitaListResponse)
             })
         }
         return v
     }
 
     private fun showQiitaListFragment(qiitaArticleResponse: ArrayList<QiitaArticleResponse>) {
-        val fragmentTransaction = fragmentManager!!.beginTransaction()
-        fragmentTransaction.replace(R.id.search_layout_frame, QiitaListFragment.Companion.newInstance(qiitaArticleResponse))
-                .addToBackStack(null)
-                .commit()
+        fragmentManager?.let {
+            val fragmentTransaction = it.beginTransaction()
+            fragmentTransaction.replace(R.id.search_layout_frame, QiitaListFragment.newInstance(qiitaArticleResponse))
+                    .addToBackStack(null)
+                    .commit()
+        }
     }
 
     companion object {
