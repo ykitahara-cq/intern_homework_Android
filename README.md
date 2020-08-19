@@ -28,17 +28,19 @@ https://developer.android.com/kotlin/style-guide?hl=ja)を載せます。
 Qiitaの記事を検索するアプリです。
 
 ### ビルド環境
-- Android Studio: 3.5.3
-- Kotlin: 1.3.72-release-Studio3.5-5
+- Android Studio: 4.0.1
+- Kotlin: 1.4.0-release-Studio4.0-5
 - minSdkVersion: 26 
 
 ### 導入ライブラリ
 - [OkHttp](https://square.github.io/okhttp/#okhttp)
 - [gson](https://github.com/google/gson)
 - [Retrofit2](https://square.github.io/retrofit/)
+- [Glide](https://github.com/bumptech/glide)
+
 
 ### 動作確認機種
-- お好きなエミュレーター、もしくは実機での確認を推奨しています。 (タブレットなどの画面サイズには基本対応しなくて構いません)
+- お好きなエミュレーター、もしくは実機での確認を推奨しています。 
 
 ### ビルド方法
 - 事前課題Repositoryのgit cloneをお願いします。
